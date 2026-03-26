@@ -19,17 +19,17 @@ pipeline {
           sh '''
           echo "Creating Maven settings.xml..."
 
-          cat <<EOF > settings.xml
-          <settings>
-            <servers>
-              <server>
-                <id>nexus-repo</id>
-                <username>${NEXUS_USER}</username>
-                <password>${NEXUS_PASS}</password>
-              </server>
-            </servers>
-          </settings>
-          EOF
+          cat > settings.xml <<EOF
+<settings>
+  <servers>
+    <server>
+      <id>nexus-repo</id>
+      <username>${NEXUS_USER}</username>
+      <password>${NEXUS_PASS}</password>
+    </server>
+  </servers>
+</settings>
+EOF
 
           echo "Running Maven build..."
           ./mvnw clean package --settings settings.xml
