@@ -31,6 +31,9 @@ pipeline {
 </settings>
 EOF
 
+          echo "Fixing mvnw permissions..."
+          chmod +x mvnw
+
           echo "Running Maven build..."
           ./mvnw clean package --settings settings.xml
           '''
