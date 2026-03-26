@@ -1,4 +1,22 @@
-sh '''
+pipeline {
+  agent any
+
+  stages {
+    stage('Checkout') {
+      steps {
+        checkout scm
+      }
+    }
+
+    stage('Build with Nexus') {
+      steps {
+        withCredentials([usernamePassword(
+          credentialsId: 'nexus-creds',
+          usernameVariable: 'NEXUS_USER',
+          passwordVariable: 'NEXUS_PASS'
+        )]) {
+
+          sh '''
 echo "Creating Maven settings.xml..."
 
 cat > settings.xml <<EOF
@@ -27,3 +45,8 @@ chmod +x mvnw
 echo "Running Maven build..."
 ./mvnw clean package --settings settings.xml
 '''
+        }
+      }
+    }
+  }
+}
