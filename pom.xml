@@ -69,6 +69,13 @@
 		</dependency>
 	</dependencies>
 
+	<repositories>
+    <repository>
+        <id>nexus-repo</id>
+        <url>http://16.170.234.97:8081/repository/maven-public/</url>
+    </repository>
+</repositories>
+
 	<build>
 		<plugins>
 			<plugin>
